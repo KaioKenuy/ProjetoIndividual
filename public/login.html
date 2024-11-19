@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByteQuest | Login</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" type="imagex/png" href="./assets/img/logo.png">
+</head>
+<body>
+    <header class="menu">
+        <a href="index.html" style="text-decoration: none"><span class="logo">ByteQuest</span></a>
+        <div class="buttons">
+            <a href="index.html">Início</a>
+            <a href="index.html#sobreNos">Sobre nós</a>
+            <a href="index.html#projeto">Projeto</a>
+            <a href="simulador.html">Simulador</a>
+        </div>
+        <a class="contratar" href="cadastro.html">Contratar</a>
+    </header>
+
+    <div class="corpo">
+        <div class="img">
+            <img src="./assets/img/cadastro.png" alt="cadastro" class="imgCad">
+        </div>
+        <div class="form">
+            <span>
+                <h2>Login</h2>
+                <span class="linha"></span>
+
+                <input oninput="validarEmail()" type="text" id="ipt_email" placeholder="Email">
+                <div id="div_email"></div>
+
+                <input oninput="validarSenha()" type="password" id="ipt_senha" placeholder="Senha">
+                <div id="div_senhas"></div>
+
+                <button onclick="entrar()">Entrar</button>
+
+                <a href="cadastro.html">Ainda não é cliente?</a>
+            </span>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var correto = true
+    var abc= true
+
+
+    function validarEmail() {
+        correto = true
+        var email = ipt_email.value
+        var possui_arroba = ipt_email.value.includes("@")
+        var termina_com = email.endsWith("Sptech.School")
+        || email.endsWith('.com')
+        || email.endsWith('.br')
+        || email.endsWith('.net')
+        if (email.length > 3 && possui_arroba && termina_com ) {
+            ipt_email.style.border = "3px solid #08a708"
+        } else {
+            correto = false
+            ipt_email.style.border = "3px solid #f70000"
+        }
+    }
+
+    function validarSenha() {
+        var senha = ipt_senha.value
+        var possui_esp = ipt_senha.value.includes("!")
+            || ipt_senha.value.includes("@")
+            || ipt_senha.value.includes("#")
+            || ipt_senha.value.includes("$")
+            || ipt_senha.value.includes("%")
+            || ipt_senha.value.includes("*")
+            || ipt_senha.value.includes("&")
+        var possui_num = ipt_senha.value.includes("1")
+            || ipt_senha.value.includes("2")
+            || ipt_senha.value.includes("3")
+            || ipt_senha.value.includes("4")
+            || ipt_senha.value.includes("5")
+            || ipt_senha.value.includes("6")
+            || ipt_senha.value.includes("7")
+            || ipt_senha.value.includes("8")
+            || ipt_senha.value.includes("9")
+            || ipt_senha.value.includes("0")
+        var texto_minusculo = senha.toLowerCase()
+        var texto_maiusculo = senha.toUpperCase()
+
+        abc = (senha != texto_maiusculo && senha != texto_minusculo)
+
+        if (abc && senha.length >= 8 && possui_esp && possui_num) {
+            div_senhas.innerHTML = "Senha Válida"
+            ipt_senha.style.border = "3px solid #08a708"
+        } else {
+            div_senhas.innerHTML = "A senha deve conter no mínimo 8 caracteres, com ao menos um caractere especial, uma letra maiúscula, uma letra minúscula e um número."
+            ipt_senha.style.border = "3px solid #f70000"
+            correto = false
+        }
+    }
+
+
+    function entrar() {
+        correto = true
+        validarEmail()
+        validarSenha()
+
+        var emailVar = ipt_email.value;
+        var senhaVar = ipt_senha.value;
+
+        if (correto != true) {
+            alert("Verifique os campos preenchidos!")
+            correto = true
+        } else {
+
+        
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+                    setTimeout(function () {
+                        window.location = "simulador.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+                
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    
+    }}
+</script>

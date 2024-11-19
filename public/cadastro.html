@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByteQuest | Cadastro</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" type="image/png" href="./assets/img/logo.png">
+</head>
+<body>
+    <header class="menu">
+        <a href="index.html" style="text-decoration: none"><span class="logo">ByteQuest</span></a>
+        <div class="buttons">
+            <a href="index.html">Início</a>
+            <a href="index.html#sobreNos">Sobre nós</a>
+            <a href="index.html#projeto">Projeto</a>
+            <a href="simulador.html"> Simulador</a>
+        </div>
+        <a class="contratar" href="cadastro.html">Contratar</a>
+    </header>
+
+    <div class="corpo">
+        <div class="img">
+            <img src="./assets/img/cadastro.png" alt="cadastro" class="imgCad">
+        </div>
+        <div class="form">
+            <span>
+                <h2>Cadastre-se</h2>
+                <span class="linha"></span>
+                <input oninput="validarNickname()" type="text" id="ipt_nomeNick" placeholder="Digite seu Nickname">
+                <div id="fant"></div>
+                <input oninput="validarCPF()" type="text" id="ipt_CPF" placeholder="CPF" maxlength="11">
+                <div id="CPF"></div>
+                <input oninput="validarEmail()" type="text" id="ipt_email" placeholder="E-mail">
+                <div id="ema"></div>
+                <input oninput="validarSenha()" type="password" id="ipt_senha" placeholder="Senha">
+                <div id="senhas"></div>
+                <input oninput="validarConfirmacao()" type="password" id="ipt_confirm" placeholder="Confirme a senha">
+                <div id="conSenha"></div>
+
+                <button onclick="validarCadastro()">Cadastrar-se</button>
+                <div id="validado"></div>
+                <a href="login.html">Já é cliente? Faça seu login aqui!</a>
+            </span>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+  var correto = true
+  var abc = true
+  validado.innerHTML = ""
+
+
+  function validarNickname() {
+      var fantasia = ipt_nomeNick.value
+
+      if (fantasia.length >= 3) {
+          ipt_nomeNick.style.border = "4px solid #08a708"
+      } else {
+          correto = false
+          ipt_nomeNick.style.border = "4px solid #f70000"
+      }
+  }
+
+  function validarCPF() {
+        var cpf = ipt_CPF.value
+        var possui_num = ipt_CPF.value.includes("1")
+            || ipt_CPF.value.includes("2")
+            || ipt_CPF.value.includes("3")
+            || ipt_CPF.value.includes("4")
+            || ipt_CPF.value.includes("5")
+            || ipt_CPF.value.includes("6")
+            || ipt_CPF.value.includes("7")
+            || ipt_CPF.value.includes("8")
+            || ipt_CPF.value.includes("9")
+            || ipt_CPF.value.includes("0")
+
+
+
+        
+        if (cpf.length == 14){
+            ipt_CPF.style.border = "3px solid #08a708"
+            correto = true
+        }
+        else if (cpf.length == 11  && possui_num) {
+            var cpfFormatado = ''
+            for (var contador = 0; contador < cpf.length; contador++) {
+                cpfFormatado += cpf[contador]
+
+                if (contador == 1) {
+                    cpfFormatado += '.'
+                } else if (contador == 4) {
+                    cpfFormatado += '.'
+                } else if (contador == 7) {
+                    cpfFormatado += '/'
+                } else if (contador == 11) {
+                    cpfFormatado += '-'
+                }
+            }
+            ipt_CPF.value = cpfFormatado
+            ipt_CPF.style.border = "3px solid #08a708"
+            correto = true
+        } else {
+            correto = false
+            ipt_CPF.style.border = "3px solid #f70000"
+            var cpfSomenteNumeros = cpf.replaceAll('.', '').replaceAll('/', '').replaceAll('-', '');
+            ipt_CPF.value = cpfSomenteNumeros;
+        }
+    }
+
+  function validarEmail() {
+      var email = ipt_email.value
+      var possui_arroba = ipt_email.value.includes("@")
+      var termina_com = email.endsWith("Sptech.School")
+          || email.endsWith('.com')
+          || email.endsWith('.br')
+          || email.endsWith('.net')
+
+      if (email.length > 3 && possui_arroba && termina_com) {
+          ipt_email.style.border = "4px solid #08a708"
+      } else {
+          correto = false
+          ipt_email.style.border = "4px solid #f70000"
+      }
+  }
+
+  function validarSenha() {
+      var senha = ipt_senha.value
+      var possui_esp = ipt_senha.value.includes("!")
+          || ipt_senha.value.includes("@")
+          || ipt_senha.value.includes("#")
+          || ipt_senha.value.includes("$")
+          || ipt_senha.value.includes("%")
+          || ipt_senha.value.includes("*")
+          || ipt_senha.value.includes("&")
+      var possui_num = ipt_senha.value.includes("1")
+          || ipt_senha.value.includes("2")
+          || ipt_senha.value.includes("3")
+          || ipt_senha.value.includes("4")
+          || ipt_senha.value.includes("5")
+          || ipt_senha.value.includes("6")
+          || ipt_senha.value.includes("7")
+          || ipt_senha.value.includes("8")
+          || ipt_senha.value.includes("9")
+          || ipt_senha.value.includes("0")
+      var texto_minusculo = senha.toLowerCase()
+      var texto_maiusculo = senha.toUpperCase()
+
+      abc = (senha != texto_maiusculo && senha != texto_minusculo)
+
+      if (abc && senha.length >= 8 && possui_esp && possui_num) {
+          senhas.innerHTML = "Senha Válida"
+          ipt_senha.style.border = "4px solid #08a708"
+      } else {
+          senhas.innerHTML = "A senha deve conter no mínimo 8 caracteres, com ao menos um caractere especial, uma letra maiúscula, uma letra minúscula e um número."
+          ipt_senha.style.border = "4px solid #f70000"
+          correto = false
+      }
+  }
+
+  function validarConfirmacao() {
+      var senha = ipt_senha.value
+      var confirmacao = ipt_confirm.value
+      if (confirmacao == senha && confirmacao.length >= 8) {
+          conSenha.innerHTML = "Senhas Válidas"
+          ipt_confirm.style.border = "4px solid #08a708"
+      } else {
+          conSenha.innerHTML = "As senhas não conferem."
+          ipt_confirm.style.border = "4px solid #f70000"
+          correto = false
+      }
+  }
+
+
+  function validarCadastro() {
+      correto = true;
+      validado.innerHTML = "";
+
+      validarNickname();
+      validarCPF();
+      validarEmail();
+      validarSenha();
+      validarConfirmacao();
+
+var nickVar = ipt_nomeNick.value
+var cpfVar = ipt_CPF.value
+var emailVar = ipt_email.value;
+var senhaVar = ipt_senha.value;
+
+
+if (correto != true) {
+            alert("Verifique os campos preenchidos!")
+            correto = true
+        } else {
+
+
+fetch("/usuarios/cadastrar", {
+method: "POST",
+headers: {
+"Content-Type": "application/json",
+},
+body: JSON.stringify({
+// crie um atributo que recebe o valor recuperado aqui
+// Agora vá para o arquivo routes/usuario.js
+nickServer: nickVar,
+cpfServer: cpfVar,
+emailServer: emailVar,
+senhaServer: senhaVar
+
+}),
+})
+.then(function (resposta) {
+console.log("resposta: ", resposta);
+
+if (resposta.ok) {
+  cardErro.style.display = "block";
+
+  mensagem_erro.innerHTML =
+    "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+  setTimeout(() => {
+    window.location = "login.html";
+  }, "2000");
+
+  limparFormulario();
+  finalizarAguardar();
+} else {
+  throw "Houve um erro ao tentar realizar o cadastro!";
+}
+})
+.catch(function (resposta) {
+console.log(`#ERRO: ${resposta}`);
+finalizarAguardar();
+});
+
+return false;
+}
+  }
+</script>
