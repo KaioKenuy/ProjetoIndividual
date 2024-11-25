@@ -1,4 +1,4 @@
-// var ambiente_processo = 'desenvolvimento';
+
 var ambiente_processo = 'producao';
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 
@@ -12,13 +12,13 @@ var HOST_APP = process.env.APP_HOST;
 
 var app = express();
 
-// Middleware para interpretar JSON
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
-// Definindo as rotas
+
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var resultadoRouter = require("./src/routes/resultado");
