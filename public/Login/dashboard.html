@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/dashboards.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Document</title>
+</head>
+<header class="menu">
+    <a href="../index.html" style="text-decoration: none"><span class="logo">ByteQuest</span></a>
+    <div class="buttons">
+        <a href="../Lindex.html">Início</a>
+        <a href="../Lindex.html#sobreNos">Sobre nós</a>
+        <a href="../Lindex.html#projeto">Projeto</a>
+    </div>
+    <a class="contratar" href="../index.html">Logout</a>
+
+</header>
+
+<body>
+    <div class="dash-content">
+        <table>
+            <tr>
+                <td class="info-table-content">Status</td>
+                <td class="info-table-content">Quantidade</td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        fetch("/resultados/ultimos")
+            .then(response => response.json())
+            .then(data => {
+                let qtdAgressivo = 0;
+                let qtdPassivo = 0;
+                let qtdsábio = 0;
+                let qtdmorte = 0;
+
+                data.forEach(element => {
+                    if (element.resultado == "agressivo") qtdAgressivo = element.quantidade;
+                    if (element.resultado == "passifista") qtdPassivo = element.quantidade;
+                    if (element.resultado == "sábio") qtdsábio = element.quantidade;
+                    if (element.resultado == "morte") qtdmorte = element.quantidade;
+
+                    const cardContent = document.querySelector("table");
+                    const tableRow = document.createElement('tr');
+                    tableRow.innerHTML = `<td>${element.resultado}</td>
+                <td>${element.quantidade}</td>`;
+                    cardContent.append(tableRow);
+                });
+
+                const ctx = document.getElementById('myChart');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Status agressivo', 'Status passivo', 'Status sábio', 'Status morte'],
+                        datasets: [{
+                            label: 'Resultados dos finais',
+                            data: [qtdAgressivo, qtdPassivo, qtdsábio, qtdmorte],
+                            backgroundColor: [
+                                'rgba(255, 99, 71, 0.5)',  // Vermelho suave para o status agressivo
+                                'rgba(54, 162, 235, 0.5)',   // Azul pastel para o status passifista
+                                'rgba(255, 206, 86, 0.5)',    // Amarelo pastel para o status sábio
+                                'rgba(153, 102, 255, 0.5)'    // Roxo pastel para o status morte
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 71, 1)',  // Vermelho sólido para o status agressivo
+                                'rgba(54, 162, 235, 1)',   // Azul sólido para o status passifista
+                                'rgba(255, 206, 86, 1)',    // Amarelo sólido para o status sábio
+                                'rgba(153, 102, 255, 1)'    // Roxo sólido para o status morte
+                            ],
+                            borderWidth: 2 // Aumenta a largura da borda
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    // Define a cor âmbar para os números do eixo Y
+                                    color: 'rgba(255, 193, 7, 1)' // Âmbar sólido
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    // Define a cor âmbar para os rótulos do eixo X
+                                    color: 'rgba(255, 193, 7, 1)' // Âmbar sólido
+                                }
+                            }
+                        }
+                    }
+                });
+            }).catch(error => console.error(error));
+    </script>
+</body>
+
+</html>

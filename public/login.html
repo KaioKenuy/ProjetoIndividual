@@ -127,11 +127,14 @@
 
                 resposta.json().then(json => {
                     console.log(json);
-                    console.log(JSON.stringify(json));
+
+                    console.log("email: " + json.email)
+                    console.log("nick: " + json.nick)
+       
+
                     sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.NOME_USUARIO = json.nick;
                     sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
                     setTimeout(function () {
                         window.location = "simulador.html";
@@ -146,7 +149,7 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+                  
                 });
             }
 

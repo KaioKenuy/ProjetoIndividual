@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/quizPersonalidade.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" type="image/png" href="./assets/img/logo.png">
     <title>Quiz de RPG | Aventura Épica</title>
@@ -13,7 +12,7 @@
 <body class="quiz-page">
 
     <header class="menu">
-        <a href="index.html" style="text-decoration: none"><span class="logo">ByteQuest</span></a>
+        <a href="../index.html" style="text-decoration: none"><span class="logo">ByteQuest</span></a>
         <div class="buttons">
             <a href="simulador.html">Simulador</a>
         </div>
@@ -40,132 +39,170 @@
         </div>
     </div>
 
-    <script>
-        var lista_perguntas = [
-            {
-                narrativa: "Você e seus companheiros chegam ao topo de uma montanha. No pico, encontram um dragão guardando um artefato brilhante. O que você faz?",
-                opcoes: [
-                    { descricao: "Pulo com tudo para tentar matar o dragão rapidamente.", resultado: "-1" },
-                    { descricao: "Recuo para planejar uma estratégia, deixando o dragão em paz por enquanto.", resultado: "passifista" },
-                    { descricao: "Ataco sozinho, sem avisar o grupo, e consigo ferir o dragão, mas os outros ficam magoados.", resultado: "agressivo" },
-                    { descricao: "Convoco o grupo e trabalhamos juntos para derrotar o dragão.", resultado: "verdadeiro" }
-                ]
-            },
-            {
-                narrativa: "Com o dragão derrotado (ou poupado), vocês encontram um portal mágico que parece levar para outro reino. Porém, ele está instável. Como você lida com isso?",
-                opcoes: [
-                    { descricao: "Tento atravessar o portal sozinho, mas algo dá errado e sou ferido.", resultado: "-1" },
-                    { descricao: "Decido não arriscar e convenço o grupo a voltar.", resultado: "passifista" },
-                    { descricao: "Forço o grupo a atravessar, mas muitos ficam ressentidos pela decisão abrupta.", resultado: "agressivo" },
-                    { descricao: "Trabalhamos juntos para estabilizar o portal e atravessamos com segurança.", resultado: "verdadeiro" }
-                ]
-            },
-            {
-                narrativa: "No outro reino, vocês encontram uma vila devastada por uma guerra. Os habitantes pedem ajuda. O que você faz?",
-                opcoes: [
-                    { descricao: "Ataco os invasores sem pensar, mas sou gravemente ferido.", resultado: "-1" },
-                    { descricao: "Prometo ajudar a vila, mas sem agir rápido, e ela sofre mais ataques.", resultado: "passifista" },
-                    { descricao: "Organizo um ataque contra os invasores, mas com decisões autoritárias que criam atritos no grupo.", resultado: "agressivo" },
-                    { descricao: "Reúno o grupo e os habitantes para formar uma defesa sólida contra os invasores.", resultado: "verdadeiro" }
-                ]
-            },
-            {
-                narrativa: "Ao explorar mais o reino, vocês encontram uma floresta densa e mágica, repleta de perigos e tesouros ocultos. Como você decide agir?",
-                opcoes: [
-                    { descricao: "Ignoro os avisos e avanço sozinho, ativando armadilhas perigosas.", resultado: "-1" },
-                    { descricao: "Evito entrar na floresta, deixando de explorar seus segredos.", resultado: "passifista" },
-                    { descricao: "Forço o grupo a entrar, mas sem planejamento, causando desconfiança.", resultado: "agressivo" },
-                    { descricao: "Exploro a floresta com cuidado, dividindo tarefas com o grupo.", resultado: "verdadeiro" }
-                ]
-            },
-            {
-                narrativa: "Finalmente, você encontra o artefato principal do reino, mas ele está protegido por uma entidade poderosa. Qual é sua escolha?",
-                opcoes: [
-                    { descricao: "Enfrento a entidade sozinho, mas sofro uma derrota esmagadora.", resultado: "-1" },
-                    { descricao: "Tento negociar pacificamente, mas a entidade não cede e o grupo se frustra.", resultado: "passifista" },
-                    { descricao: "Ataco com fúria, mas o poder destrutivo gera consequências terríveis para o grupo.", resultado: "agressivo" },
-                    { descricao: "Unimos forças e enfrentamos a entidade como um time, triunfando juntos.", resultado: "verdadeiro" }
-                ]
-            }
-        ];
-        var indiceQuestaoAtual = 0;
-        var passivo = 0;
-        var agressivo = 0;
-        var verdadeiro = 0;
 
-        function iniciarQuiz() {
-            document.getElementById('botao-iniciar-quiz').style.display = 'none';
-            document.querySelector('.the').style.display = 'none';
-            document.querySelector('h2').style.display = 'none';
-            mostrarPergunta();
-        }
-
-        function mostrarPergunta() {
-            if (indiceQuestaoAtual < lista_perguntas.length) {
-                var pergunta = lista_perguntas[indiceQuestaoAtual];
-                var opcoes = "";
-                for (var i = 0; i < pergunta.opcoes.length; i++) {
-                    opcoes += `<button class="opcao-button" onclick="responder('${pergunta.opcoes[i].resultado}')">${pergunta.opcoes[i].descricao}</button>`;
-                }
-                document.getElementById('quiz-content').innerHTML = `
-                    <h3>${pergunta.narrativa}</h3>
-                    <br>
-                    <br>
-                    <div>
-                        ${opcoes}
-                    </div>
-                `;
-            } else {
-                mostrarResultado();
-            }
-        }
-
-        function responder(resultadoEscolhido) {
-            if (resultadoEscolhido === "passifista") {
-                passivo++;
-            } else if (resultadoEscolhido === "agressivo") {
-                agressivo++;
-            } else if (resultadoEscolhido === "verdadeiro") {
-                verdadeiro++;
-            }
-            indiceQuestaoAtual++;
-            mostrarPergunta();
-        }
-
-        function mostrarResultado() {
-            var resultadoFinal = "";
-            if (verdadeiro >= 3) {
-                resultadoFinal = "Parabéns! Você tomou decisões sábias e liderou o grupo ao sucesso completo.";
-            } else if (agressivo > passivo) {
-                resultadoFinal = "Sua agressividade trouxe vitórias, mas à custa de aliados e confiança.";
-            } else if (passivo > agressivo) {
-                resultadoFinal = "Sua paciência e bondade foram admiráveis, mas o reino sofreu por sua falta de ação.";
-            } else {
-                resultadoFinal = "Sua aventura teve altos e baixos. Talvez da próxima vez você encontre um equilíbrio.";
-            }
-
-            var resultado = `
-                <br><br><br>
-                <br><br><br>
-                <h3>${resultadoFinal}</h3>
-                <br><br><br>
-                <br><br><br>
-                <div class="button-container">
-                    <button onclick="reiniciarQuiz()" class="button-restart">Reiniciar Quiz</button>
-                    <button onclick="voltarDashboard()" class="button-dashboard">Voltar para a Dashboard</button>
-                </div>
-            `;
-            document.getElementById('quiz-content').innerHTML = resultado;
-        }
-
-        function reiniciarQuiz() {
-            indiceQuestaoAtual = 0;
-            passivo = 0;
-            agressivo = 0;
-            verdadeiro = 0;
-            iniciarQuiz();
-        }
-    </script>
 </body>
 
 </html>
+<script>
+    var lista_perguntas = [
+        {
+            narrativa: "Você e seus companheiros chegam ao topo de uma montanha. No pico, encontram um dragão guardando um artefato brilhante. O que você faz?",
+            opcoes: [
+                { descricao: "Pulo com tudo para tentar matar o dragão rapidamente.", resultado: "-1" },
+                { descricao: "Recuo para planejar uma estratégia, deixando o dragão em paz por enquanto.", resultado: "passifista" },
+                { descricao: "Ataco sozinho, sem avisar o grupo, e consigo ferir o dragão, mas os outros ficam magoados.", resultado: "agressivo" },
+                { descricao: "Convoco o grupo e trabalhamos juntos para derrotar o dragão.", resultado: "verdadeiro" }
+            ]
+        },
+        {
+            narrativa: "Com o dragão derrotado (ou poupado), vocês encontram um portal mágico que parece levar para outro reino. Porém, ele está instável. Como você lida com isso?",
+            opcoes: [
+                { descricao: "Trabalhamos juntos para estabilizar o portal e atravessamos com segurança.", resultado: "verdadeiro" },
+                { descricao: "Tento atravessar o portal sozinho, mas algo dá errado e sou ferido.", resultado: "-1" },
+                { descricao: "Decido não arriscar e convenço o grupo a voltar.", resultado: "passifista" },
+                { descricao: "Forço o grupo a atravessar, mas muitos ficam ressentidos pela decisão abrupta.", resultado: "agressivo" }
+            ]
+        },
+        {
+            narrativa: "No outro reino, vocês encontram uma vila devastada por uma guerra. Os habitantes pedem ajuda. O que você faz?",
+            opcoes: [
+                { descricao: "Ataco os invasores sem pensar, mas sou gravemente ferido.", resultado: "-1" },
+                { descricao: "Reúno o grupo e os habitantes para formar uma defesa sólida contra os invasores.", resultado: "verdadeiro" },
+                { descricao: "Organizo um ataque contra os invasores, mas com decisões autoritárias que criam atritos no grupo.", resultado: "agressivo" },
+                { descricao: "Prometo ajudar a vila, mas sem agir rápido, e ela sofre mais ataques.", resultado: "passifista" }
+            ]
+        },
+        {
+            narrativa: "Ao explorar mais o reino, vocês encontram uma floresta densa e mágica, repleta de perigos e tesouros ocultos. Como você decide agir?",
+            opcoes: [
+                { descricao: "Evito entrar na floresta, deixando de explorar seus segredos.", resultado: "passifista" },
+                { descricao: "Exploro a floresta com cuidado, dividindo tarefas com o grupo.", resultado: "verdadeiro" },
+                { descricao: "Forço o grupo a entrar, mas sem planejamento, causando desconfiança.", resultado: "agressivo" },
+                { descricao: "Ignoro os avisos e avanço sozinho, ativando armadilhas perigosas.", resultado: "-1" }
+            ]
+        },
+        {
+            narrativa: "Finalmente, você encontra o artefato principal do reino, mas ele está protegido por uma entidade poderosa. Qual é sua escolha?",
+            opcoes: [
+                { descricao: "Tento negociar pacificamente, mas a entidade não cede e o grupo se frustra.", resultado: "passifista" },
+                { descricao: "Enfrento a entidade sozinho, mas sofro uma derrota esmagadora.", resultado: "-1" },
+                { descricao: "Ataco com fúria, mas o poder destrutivo gera consequências terríveis para o grupo.", resultado: "agressivo" },
+                { descricao: "Unimos forças e enfrentamos a entidade como um time, triunfando juntos.", resultado: "verdadeiro" }
+            ]
+        }
+    ];
+    var indiceQuestaoAtual = 0;
+    var passivo = 0;
+    var agressivo = 0;
+    var verdadeiro = 0;
+
+    function iniciarQuiz() {
+        document.getElementById('botao-iniciar-quiz').style.display = 'none';
+        document.querySelector('.the').style.display = 'none';
+        document.querySelector('h2').style.display = 'none';
+        mostrarPergunta();
+    }
+
+    function mostrarPergunta() {
+        if (indiceQuestaoAtual < lista_perguntas.length) {
+            var pergunta = lista_perguntas[indiceQuestaoAtual];
+            var opcoes = "";
+            for (var i = 0; i < pergunta.opcoes.length; i++) {
+                opcoes += `<button class="opcao-button" onclick="responder('${pergunta.opcoes[i].resultado}')">${pergunta.opcoes[i].descricao}</button>`;
+            }
+            document.getElementById('quiz-content').innerHTML = `
+                <h3>${pergunta.narrativa}</h3>
+                <br>
+                <br>
+                <div>
+                    ${opcoes}
+                </div>
+            `;
+        } else {
+            mostrarResultado();
+        }
+    }
+
+    function responder(resultadoEscolhido) {
+        if (resultadoEscolhido === "passifista") {
+            passivo++;
+        } else if (resultadoEscolhido === "agressivo") {
+            agressivo++;
+        } else if (resultadoEscolhido === "verdadeiro") {
+            verdadeiro++;
+        }
+        indiceQuestaoAtual++;
+        mostrarPergunta();
+    }
+    function mostrarResultado() {
+        var resultadoFinal = "";
+        var resultadoVar = ""; // Variável para armazenar o resultado que será enviado
+
+        if (verdadeiro >= 3) {
+            resultadoFinal = "Parabéns! Você tomou decisões sábias e liderou o grupo ao sucesso completo.";
+            resultadoVar = "sábio"; // Exemplo de resultado
+        } else if (agressivo > passivo) {
+            resultadoFinal = "Sua agressividade trouxe vitórias, mas à custa de aliados e confiança.";
+            resultadoVar = "agressivo"; // Exemplo de resultado
+        } else if (passivo > agressivo) {
+            resultadoFinal = "Vc chegou no final mas não obteve riquezas, porém o verdadeiro tesouro é os amigos que fazemos pelo caminho .";
+            resultadoVar = "passifista"; // Exemplo de resultado
+        } else {
+            resultadoFinal = "Sua aventura teve altos e baixos. E infelizmente você não tomou atitudes sábias e acabou morrendo.";
+            resultadoVar = "morte"; // Exemplo de resultado
+        }
+
+        // Enviar resultado para o banco de dados
+        enviarResultado(resultadoVar);
+        console.log("ID do jogador:", sessionStorage.ID_USUARIO);
+
+        var resultado = `
+        <br><br><br>
+        <br><br><br>
+        <h3>${resultadoFinal}</h3>
+        <br><br><br>
+        <br><br><br>
+        <div class="button-container">
+            <button onclick="reiniciarQuiz()" class="button-restart">Reiniciar Quiz</button>
+            <button onclick="window.location.href = 'login/dashboard.html'" class="button-dashboard">Visualizar Dashboard</button>
+        </div>
+    `;
+        document.getElementById('quiz-content').innerHTML = resultado;
+        function voltarParaDashboard() {
+            window.location.href = "./dashboard.html"; // Altere "dashboard.html" para o caminho correto da sua página de dashboard
+        }
+    }
+
+    function reiniciarQuiz() {
+        indiceQuestaoAtual = 0;
+        passivo = 0;
+        agressivo = 0;
+        verdadeiro = 0;
+        iniciarQuiz();
+    }
+    function enviarResultado(resultadoVar) {
+
+        console.log(resultadoVar)
+
+        fetch("/resultados/postResultadoQuiz", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                resultado: resultadoVar,
+                idPlayer: sessionStorage.ID_USUARIO
+            }),
+        })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    alert("Resultado enviado com sucesso!");
+                } else {
+                    alert("Erro ao enviar resultado.");
+                }
+            })
+            .catch(function (erro) {
+                console.error(erro);
+            });
+    }
+</script>

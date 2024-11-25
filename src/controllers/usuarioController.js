@@ -20,7 +20,7 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
                         res.json({
-                            id: resultadoAutenticar[0].id,
+                            id: resultadoAutenticar[0].idPlayer,
                             nick: resultadoAutenticar[0].nick,
                             email: resultadoAutenticar[0].email,
                             cpf: resultadoAutenticar[0].cpf,
@@ -89,6 +89,20 @@ function cadastrar(req, res) {
                 }
             );
     }
+}
+function postResultadoQuiz(req, res) {
+    console.log(req.body); // Verifique o conteúdo do corpo da requisição
+    const idPlayer = req.body.idPlayer;
+    const resultado = req.body.resultado;
+
+    resultadoModel.postResultadoQuiz(idPlayer, resultado)
+    .then(response => {
+        return res.status(201).json(response);
+    })
+    .catch(e => {
+        console.error(e);
+        return res.status(500).json({ error: 'Erro ao processar a requisição' });
+    });
 }
 
 module.exports = {
