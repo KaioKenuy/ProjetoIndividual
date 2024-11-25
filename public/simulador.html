@@ -50,7 +50,7 @@
             opcoes: [
                 { descricao: "Pulo com tudo para tentar matar o dragão rapidamente.", resultado: "-1" },
                 { descricao: "Recuo para planejar uma estratégia, deixando o dragão em paz por enquanto.", resultado: "passifista" },
-                { descricao: "Ataco sozinho, sem avisar o grupo, e consigo ferir o dragão, mas os outros ficam magoados.", resultado: "agressivo" },
+                { descricao: "Ataco sozinho ignorando meus companheiros, sem avisar o grupo, e consigo ferir o dragão.", resultado: "agressivo" },
                 { descricao: "Convoco o grupo e trabalhamos juntos para derrotar o dragão.", resultado: "verdadeiro" }
             ]
         },
@@ -58,18 +58,18 @@
             narrativa: "Com o dragão derrotado (ou poupado), vocês encontram um portal mágico que parece levar para outro reino. Porém, ele está instável. Como você lida com isso?",
             opcoes: [
                 { descricao: "Trabalhamos juntos para estabilizar o portal e atravessamos com segurança.", resultado: "verdadeiro" },
-                { descricao: "Tento atravessar o portal sozinho, mas algo dá errado e sou ferido.", resultado: "-1" },
+                { descricao: "Tento atravessar o portal sozinho, ignorando os conselhos dos meus aliados.", resultado: "-1" },
                 { descricao: "Decido não arriscar e convenço o grupo a voltar.", resultado: "passifista" },
-                { descricao: "Forço o grupo a atravessar, mas muitos ficam ressentidos pela decisão abrupta.", resultado: "agressivo" }
+                { descricao: "Forço o grupo a atravessar, mas muitos ficam ressentidos pela decisão Impulsiva.", resultado: "agressivo" }
             ]
         },
         {
             narrativa: "No outro reino, vocês encontram uma vila devastada por uma guerra. Os habitantes pedem ajuda. O que você faz?",
             opcoes: [
-                { descricao: "Ataco os invasores sem pensar, mas sou gravemente ferido.", resultado: "-1" },
+                { descricao: "Ataco os invasores sem pensar duas vezes ignorando minha segurança.", resultado: "-1" },
                 { descricao: "Reúno o grupo e os habitantes para formar uma defesa sólida contra os invasores.", resultado: "verdadeiro" },
-                { descricao: "Organizo um ataque contra os invasores, mas com decisões autoritárias que criam atritos no grupo.", resultado: "agressivo" },
-                { descricao: "Prometo ajudar a vila, mas sem agir rápido, e ela sofre mais ataques.", resultado: "passifista" }
+                { descricao: "Organizo um ataque contra os invasores, mas sou duro nas palavras e criam atrito no grupo.", resultado: "agressivo" },
+                { descricao: "Prometo ajudar a vila, só que no futuro pois preciso pensar bem antes de agir.", resultado: "passifista" }
             ]
         },
         {
@@ -78,16 +78,16 @@
                 { descricao: "Evito entrar na floresta, deixando de explorar seus segredos.", resultado: "passifista" },
                 { descricao: "Exploro a floresta com cuidado, dividindo tarefas com o grupo.", resultado: "verdadeiro" },
                 { descricao: "Forço o grupo a entrar, mas sem planejamento, causando desconfiança.", resultado: "agressivo" },
-                { descricao: "Ignoro os avisos e avanço sozinho, ativando armadilhas perigosas.", resultado: "-1" }
+                { descricao: "Ignoro os avisos e avanço sozinho.", resultado: "-1" }
             ]
         },
         {
             narrativa: "Finalmente, você encontra o artefato principal do reino, mas ele está protegido por uma entidade poderosa. Qual é sua escolha?",
             opcoes: [
-                { descricao: "Tento negociar pacificamente, mas a entidade não cede e o grupo se frustra.", resultado: "passifista" },
-                { descricao: "Enfrento a entidade sozinho, mas sofro uma derrota esmagadora.", resultado: "-1" },
-                { descricao: "Ataco com fúria, mas o poder destrutivo gera consequências terríveis para o grupo.", resultado: "agressivo" },
-                { descricao: "Unimos forças e enfrentamos a entidade como um time, triunfando juntos.", resultado: "verdadeiro" }
+                { descricao: "Tento negociar pacificamente.", resultado: "passifista" },
+                { descricao: "Enfrento a entidade sozinho.", resultado: "-1" },
+                { descricao: "Ataco sem pensar duas vezes, é ele ou nós.", resultado: "agressivo" },
+                { descricao: "Unimos forças e enfrentamos a entidade como um time.", resultado: "verdadeiro" }
             ]
         }
     ];
