@@ -20,5 +20,5 @@ function obterResultados() {
 
 module.exports = {
     postResultadoQuiz,
-    obterResultados // Adicione esta linha
+    obterResultados 
 };

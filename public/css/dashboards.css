@@ -2,12 +2,12 @@
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom, #000000, #333333); /* Gradiente de fundo */
+  background: linear-gradient(to bottom, #000000, #333333); 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Altura total da viewport */
+  height: 100vh; 
 }
 
 td {
@@ -16,7 +16,7 @@ td {
 
 .dash-content {
 width: 80%;
-background: rgba(51, 51, 51, 0.8); /* Fundo escuro e levemente transparente */
+background: rgba(51, 51, 51, 0.8); 
 border-radius: 10px;
 padding: 20px;
 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
@@ -30,43 +30,43 @@ table {
 }
 
 .info-table-content {
-  color: #FFC107; /* Cor do título da tabela */
+  color: #FFC107; 
   font-weight: bold;
   text-align: center;
   padding: 10px;
 }
 
 tr:nth-child(odd) {
-  background-color: #444; /* Cor de fundo para linhas ímpares */
+  background-color: #444;
 }
 
 tr:nth-child(even) {
-  background-color: #555; /* Cor de fundo para linhas pares */
+  background-color: #555; 
 }
 
 #myChart {
   width: 80%;
-  height: 400px; /* Altura do gráfico */
+  height: 400px; 
   margin-top: 20px;
 }
 .status-agressivo {
-  color: orange; /* Cor para o status agressivo */
+  color: orange; 
 }
 
 .status-passifista {
-  color: green; /* Cor para o status passifista */
+  color: green;
 }
 
 .status-sábio {
-  color: gold; /* Cor para o status sábio */
+  color: gold;
 }
 
 .status-morte {
-  color: red; /* Cor para o status morte */
+  color: red; 
 }
 
 .info-table-content {
-  color: gold; /* Cor do título da tabela */
+  color: gold; 
   font-weight: bold;
   text-align: center;
   padding: 10px;

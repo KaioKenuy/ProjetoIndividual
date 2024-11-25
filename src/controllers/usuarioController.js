@@ -1,5 +1,4 @@
 var usuarioModel = require("../models/usuarioModel");
-// var aquarioModel = require("../models/aquarioModel");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -15,7 +14,7 @@ function autenticar(req, res) {
             .then(
                 function (resultadoAutenticar) {
                     console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); 
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
@@ -24,17 +23,9 @@ function autenticar(req, res) {
                             nick: resultadoAutenticar[0].nick,
                             email: resultadoAutenticar[0].email,
                             cpf: resultadoAutenticar[0].cpf,
-                            senha: resultadoAutenticar[0].senha,
-                            // aquarios: resultadoAutenticar
+                            senha: resultadoAutenticar[0].senha
                         }); 
-                        // aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-                        //     .then((resultadoAutenticar) => {
-                        //         if (resultadoAutenticar.length > 0) {
-                                    
-                        //         } else {
-                        //             res.status(204).json({ aquarios: [] });
-                        //         }
-                        //     })
+
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
@@ -53,14 +44,14 @@ function autenticar(req, res) {
 }
 
 function cadastrar(req, res) {
-    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+
     var nick = req.body.nickServer;
     var cpf = req.body.cpfServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
 
-    // Faça as validações dos valores
+
     if ( nick == undefined) {
         res.status(400).send(`Seu nick está undefined`);
     } else if (cpf == undefined) {
@@ -72,7 +63,7 @@ function cadastrar(req, res) {
     }else {
 
 
-        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+    
         usuarioModel.cadastrar(nick, cpf, email, senha)
             .then(
                 function (resultado) {
@@ -91,7 +82,7 @@ function cadastrar(req, res) {
     }
 }
 function postResultadoQuiz(req, res) {
-    console.log(req.body); // Verifique o conteúdo do corpo da requisição
+    console.log(req.body); 
     const idPlayer = req.body.idPlayer;
     const resultado = req.body.resultado;
 

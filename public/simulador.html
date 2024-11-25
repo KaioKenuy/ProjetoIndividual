@@ -136,20 +136,20 @@
     }
     function mostrarResultado() {
         var resultadoFinal = "";
-        var resultadoVar = ""; // Variável para armazenar o resultado que será enviado
+        var resultadoVar = "";
 
         if (verdadeiro >= 3) {
             resultadoFinal = "Parabéns! Você tomou decisões sábias e liderou o grupo ao sucesso completo.";
-            resultadoVar = "sábio"; // Exemplo de resultado
+            resultadoVar = "sábio"; 
         } else if (agressivo > passivo) {
             resultadoFinal = "Sua agressividade trouxe vitórias, mas à custa de aliados e confiança.";
-            resultadoVar = "agressivo"; // Exemplo de resultado
+            resultadoVar = "agressivo"; 
         } else if (passivo > agressivo) {
             resultadoFinal = "Vc chegou no final mas não obteve riquezas, porém o verdadeiro tesouro é os amigos que fazemos pelo caminho .";
-            resultadoVar = "passifista"; // Exemplo de resultado
+            resultadoVar = "passifista"; 
         } else {
             resultadoFinal = "Sua aventura teve altos e baixos. E infelizmente você não tomou atitudes sábias e acabou morrendo.";
-            resultadoVar = "morte"; // Exemplo de resultado
+            resultadoVar = "morte"; 
         }
 
         // Enviar resultado para o banco de dados
@@ -169,7 +169,7 @@
     `;
         document.getElementById('quiz-content').innerHTML = resultado;
         function voltarParaDashboard() {
-            window.location.href = "./dashboard.html"; // Altere "dashboard.html" para o caminho correto da sua página de dashboard
+            window.location.href = "./dashboard.html"; 
         }
     }
 
